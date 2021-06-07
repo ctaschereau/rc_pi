@@ -1,0 +1,69 @@
+body {
+	width: 100%;
+	touch-action: none;
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	 -khtml-user-select: none; /* Konqueror HTML */
+	   -moz-user-select: none; /* Firefox */
+		-ms-user-select: none; /* Internet Explorer/Edge */
+			user-select: none; /* Non-prefixed version, currently
+								  supported by Chrome and Opera */
+}
+
+h1 {
+	margin: 0 auto 100px auto;
+	text-align: center;
+}
+
+div#dpad {
+	background-image: url("/static/images/dpad.png");
+	width: 512px;
+	height: 512px;
+	position: relative;
+	margin: 0 auto;
+}
+
+div#dpad button {
+	position: absolute;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	background-color: unset;
+    color: unset;
+}
+
+div#dpad button:active:hover {
+	background-color: silver;
+}
+
+button#up {
+	background-image: url("/static/images/up.png");
+	width: 192px;
+	height: 160px;
+	top: 0;
+	left: 160px;
+}
+
+button#down {
+	background-image: url("/static/images/down.png");
+	width: 192px;
+	height: 160px;
+	bottom: 0;
+	left: 160px;
+}
+
+button#left {
+	background-image: url("/static/images/left.png");
+	width: 160px;
+	height: 192px;
+	top: 160px;
+	left: 0;
+}
+
+button#right {
+	background-image: url("/static/images/right.png");
+	width: 160px;
+	height: 192px;
+	top: 160px;
+	right: 0;
+}
