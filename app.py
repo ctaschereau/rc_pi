@@ -14,8 +14,7 @@ def index():
 
 @app.route('/control', methods=['POST'])
 def control():
-	print(request.json['direction'])
-	print(request.json['event'])
+	global speed
 
 	if request.json['event'] == 'click':
 		if request.json['direction'] == 'right':
@@ -25,6 +24,7 @@ def control():
 		if request.json['direction'] == 'left':
 			if speed > 0.0:
 				speed = speed - 0.1
+		print('Speed is now : ' + str(speed))
 
 	if request.json['event'] == 'start':
 		if request.json['direction'] == 'up':
