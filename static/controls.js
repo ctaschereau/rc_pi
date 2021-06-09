@@ -18,6 +18,17 @@ handleInteractionStart = (event) => {
 handleInteraction = (event) => {
 	event.preventDefault()
 	console.log(`${event.currentTarget.id} was ${event.type}ed`);
+
+	fetch('/control', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			direction: event.currentTarget.id,
+			event: 'click',
+		})
+	})
 };
 
 handleInteractionEnd = (event) => {

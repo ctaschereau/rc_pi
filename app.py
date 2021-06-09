@@ -1,12 +1,12 @@
 from flask import Flask, render_template, request
-import RPi.GPIO as GPIO    # Import Raspberry Pi GPIO library
-from time import sleep     # Import the sleep function from the time module
+from gpiozero import Motor
+from time import sleep
 
-GPIO.setmode(GPIO.BOARD)   # Use physical pin numbering
-GPIO.setwarnings(False)
-GPIO.setup(8, GPIO.OUT, initial=GPIO.LOW)
+motor = Motor(17, 18, None, True)
 
 app = Flask(__name__)
+
+speed = 1.0
 
 @app.route('/')
 def index():
@@ -16,9 +16,28 @@ def index():
 def control():
 	print(request.json['direction'])
 	print(request.json['event'])
-	GPIO.output(8, GPIO.HIGH) # Turn on
-	sleep(1)                  # Sleep for 1 second
-	GPIO.output(8, GPIO.LOW)  # Turn off
+
+	if request.json['event'] == 'click':
+		if request.json['direction'] == 'right':
+			if speed < 1.0:
+				speed = speed + 0.1
+		
+		if request.json['direction'] == 'left':
+			if speed > 0.0:
+				speed = speed - 0.1
+
+	if request.json['event'] == 'start':
+		if request.json['direction'] == 'up':
+			motor.forward(speed)
+		
+		if request.json['direction'] == 'down':
+			motor.backward(speed)
+
+	if request.json['event'] == 'end':
+		motor.stop()
+		
+			
+	
 	return ('', 204)
 
 if __name__ == '__main__':
